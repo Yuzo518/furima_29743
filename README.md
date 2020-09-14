@@ -32,7 +32,7 @@
 | area               | integer    | null: false                    |
 | date_of_shipment   | integer    | null: false                    |
 | delivery_fee       | integer    | null: false                    |
-| user_id            | references | null: false, foreign_key: true |
+| user               | references | null: false, foreign_key: true |
 
 ### Association
 
