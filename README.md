@@ -27,11 +27,11 @@
 | name               | string     | null: false                    |
 | value              | integer    | null: false                    |
 | comment            | string     | null: false                    |
-| category           | string     | null: false                    |
-| status             | string     | null: false                    |
-| area               | string     | null: false                    |
-| date_of_shipment   | string     | null: false                    |
-| delivery_fee       | string     | null: false                    |
+| category           | integer    | null: false                    |
+| status             | integer    | null: false                    |
+| area               | integer    | null: false                    |
+| date_of_shipment   | integer    | null: false                    |
+| delivery_fee       | integer    | null: false                    |
 | user_id            | references | null: false, foreign_key: true |
 
 ### Association
