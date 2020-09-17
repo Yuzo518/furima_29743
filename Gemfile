@@ -61,3 +61,4 @@ group :production do
 end
 gem 'devise'
 gem 'pry-rails'
+gem 'active_hash'
