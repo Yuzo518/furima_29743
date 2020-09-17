@@ -26,7 +26,7 @@
 | ------------------ | ---------- | ------------------------------ |
 | name               | string     | null: false                    |
 | value              | integer    | null: false                    |
-| comment            | string     | null: false                    |
+| comment            | text       | null: false                    |
 | category           | integer    | null: false                    |
 | status             | integer    | null: false                    |
 | area               | integer    | null: false                    |
