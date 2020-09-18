@@ -15,10 +15,11 @@ class Item < ApplicationRecord
   validates :comment, presence: true, length: { maximum: 1000 }
 
   # 商品の価格は半角数字¥300~¥9,999,999の間で必須
-  validates :value, presence: true
-  validates :value, numericality: { only_integer: true }
-  validates :value, numericality: { greater_than_or_equal_to: 300 }
-  validates :value, numericality: { less_than_or_equal_to: 9_999_999 }
+  validates :value, presence: true, numericality: {
+    only_integer: true,
+    greater_than_or_equal_to: 300,
+    less_than_or_equal_to: 9_999_999
+  }
 
   # 画像は必須
   validates :image, presence: true
