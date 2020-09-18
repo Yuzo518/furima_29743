@@ -18,7 +18,7 @@ class Item < ApplicationRecord
   validates :value, presence: true
   validates :value, numericality: { only_integer: true }
   validates :value, numericality: { greater_than_or_equal_to: 300 }
-  validates :value, numericality: { less_than_or_equal_to: 9999999 }
+  validates :value, numericality: { less_than_or_equal_to: 9_999_999 }
 
   # 画像は必須
   validates :image, presence: true

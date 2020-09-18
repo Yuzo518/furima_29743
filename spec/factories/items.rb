@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :item do
-    name                { "ItemaName" }
+    name                { 'ItemaName' }
     value               { 3000 }
-    comment             { "ItemeComment" }
+    comment             { 'ItemeComment' }
     category_id         { 2 }
     status_id           { 2 }
     date_of_shipment_id { 2 }
