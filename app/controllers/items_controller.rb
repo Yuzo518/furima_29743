@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  before_action :move_index, only: [:edit, :update]
+  before_action :item_find, only: [:show, :edit, :update]
   def index
     @items = Item.order('created_at DESC')
   end
@@ -17,7 +19,17 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
+  end
+
+  def edit
+  end
+
+  def update
+    if @item.update(item_params)
+      redirect_to item_path
+    else
+      render :edit
+    end
   end
 
   private
@@ -34,5 +46,14 @@ class ItemsController < ApplicationController
       :date_of_shipment_id,
       :image
     ).merge(user_id: current_user.id)
+  end
+
+  def move_index
+    item = Item.find(params[:id])
+    redirect_to root_path if current_user.id != item.user_id
+  end
+
+  def item_find
+    @item = Item.find(params[:id])
   end
 end
