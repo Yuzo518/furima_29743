@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :move_index, only:[:edit, :update]
+  before_action :move_index, only: [:edit, :update]
   def index
     @items = Item.order('created_at DESC')
   end
@@ -52,8 +52,6 @@ class ItemsController < ApplicationController
 
   def move_index
     item = Item.find(params[:id])
-    if current_user.id != item.user_id
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user.id != item.user_id
   end
 end
