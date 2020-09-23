@@ -2,6 +2,7 @@ class BuysController < ApplicationController
 
   def index
     @item = Item.find(params[:item_id])
+    @buy = BuyAddress.new
   end
 
   def new
@@ -14,7 +15,8 @@ class BuysController < ApplicationController
       @buy.save
       return redirect_to root_path
     else
-      return 'index'
+      @item = Item.find(params[:item_id])
+      render 'index'
     end
   end
 
