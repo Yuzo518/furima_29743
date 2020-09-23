@@ -15,7 +15,7 @@ class BuysController < ApplicationController
     if @buy.valid?
       pay_item
       @buy.save
-      return redirect_to root_path
+      redirect_to root_path
     else
       @item = Item.find(params[:item_id])
       render 'index'
@@ -39,11 +39,11 @@ class BuysController < ApplicationController
 
   def pay_item
     item = Item.find(buy_params[:item_id])
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: item.value,
       card: buy_params[:token],
-      currency:'jpy'
+      currency: 'jpy'
     )
   end
 
@@ -51,7 +51,7 @@ class BuysController < ApplicationController
     item = Item.find(params[:item_id])
     # もしその商品が購入済み（その商品テーブルのIDが購入テーブルのitem_idに存在していたら）
     # もしくは出品したユーザー（商品のユーザーIDとログインしているユーザーのIDが一致）
-    if !Buy.find_by(item_id: params[:id])
+    if Buy.find_by(item_id: params[:item_id])
       redirect_to root_path
     elsif item.user_id == current_user.id
       redirect_to root_path
