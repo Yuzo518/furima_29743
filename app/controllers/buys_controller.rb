@@ -8,7 +8,7 @@ class BuysController < ApplicationController
   end
 
   def create
-    @buy = Buy.new(item_id: buy_params[:item_id], user_id: current_user.id)
+    @buy = Buy.new(item_id: buy_params[:item_id], user_id: current_user.id, token: buy_params[:token])
     if @buy.valid?
       pay_item
       @buy.save
