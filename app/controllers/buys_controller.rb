@@ -1,4 +1,6 @@
 class BuysController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :edit]
+  before_action :move_index_check, only: [:index]
 
   def index
     @item = Item.find(params[:item_id])
@@ -45,4 +47,14 @@ class BuysController < ApplicationController
     )
   end
 
+  def move_index_check
+    item = Item.find(params[:item_id])
+    # もしその商品が購入済み（その商品テーブルのIDが購入テーブルのitem_idに存在していたら）
+    # もしくは出品したユーザー（商品のユーザーIDとログインしているユーザーのIDが一致）
+    if !Buy.find_by(item_id: params[:id])
+      redirect_to root_path
+    elsif item.user_id == current_user.id
+      redirect_to root_path
+    end
+  end
 end
