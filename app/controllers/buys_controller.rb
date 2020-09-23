@@ -8,7 +8,7 @@ class BuysController < ApplicationController
   end
 
   def create
-    @buy = Buy.new(item_id: buy_params[:item_id], user_id: current_user.id, token: buy_params[:token])
+    @buy = BuyAddress.new(buy_params)
     if @buy.valid?
       pay_item
       @buy.save
@@ -21,11 +21,19 @@ class BuysController < ApplicationController
   private
 
   def buy_params
-    params.permit(:item_id, :token)
+    params.permit(
+      :token,
+      :item_id,
+      :post_code,
+      :prefectures_id,
+      :municipal_district,
+      :house_number,
+      :building_name,
+      :phone_number
+    ).merge(user_id: current_user.id)
   end
 
   def pay_item
-    # buy_paramsメソッドより取得したitem_idより指定のitemを取得する
     item = Item.find(buy_params[:item_id])
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
