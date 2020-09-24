@@ -50,9 +50,7 @@ class BuysController < ApplicationController
     item_find
     # もしその商品が購入済み（その商品テーブルのIDが購入テーブルのitem_idに存在していたら）
     # もしくは出品したユーザー（商品のユーザーIDとログインしているユーザーのIDが一致）
-    if Buy.find_by(item_id: params[:item_id])
-      redirect_to root_path
-    elsif @item.user_id == current_user.id
+    if Buy.find_by(item_id: params[:item_id])|| (@item.user_id == current_user.id)
       redirect_to root_path
     end
   end
