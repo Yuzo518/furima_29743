@@ -1,9 +1,9 @@
 class BuysController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :edit]
+  before_action :authenticate_user!, only: [:index]
   before_action :move_index_check, only: [:index]
+  before_action :item_find, only: [:index, :create]
 
   def index
-    @item = Item.find(params[:item_id])
     @buy = BuyAddress.new
   end
 
@@ -17,7 +17,6 @@ class BuysController < ApplicationController
       @buy.save
       redirect_to root_path
     else
-      @item = Item.find(params[:item_id])
       render 'index'
     end
   end
@@ -48,13 +47,17 @@ class BuysController < ApplicationController
   end
 
   def move_index_check
-    item = Item.find(params[:item_id])
+    item_find
     # もしその商品が購入済み（その商品テーブルのIDが購入テーブルのitem_idに存在していたら）
     # もしくは出品したユーザー（商品のユーザーIDとログインしているユーザーのIDが一致）
     if Buy.find_by(item_id: params[:item_id])
       redirect_to root_path
-    elsif item.user_id == current_user.id
+    elsif @item.user_id == current_user.id
       redirect_to root_path
     end
+  end
+
+  def item_find
+    @item = Item.find(params[:item_id])
   end
 end
