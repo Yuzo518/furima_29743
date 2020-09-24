@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :date_of_shipment
   belongs_to :user
   has_one_attached :image
+  has_one :buy
 
   # 商品名は４０文字以内で必須
   validates :name, presence: true, length: { maximum: 40 }
