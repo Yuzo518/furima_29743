@@ -8,7 +8,7 @@
     </h2>
     <div class='item-img-content'>
       <%= image_tag @item.image ,class:"item-box-img" %>
-      <% if Buy.find_by(item_id: @item.id) %>
+      <% if @item.buy %>
         <div class='sold-out'>
           <span>Sold Out!!</span>
         </div>
@@ -23,7 +23,7 @@
       </span>
     </div>
 
-    <% if !Buy.find_by(item_id: @item.id) %>
+    <% if !@item.buy %>
       <%# ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
       <% if user_signed_in? && current_user.id == @item.user_id %>
         <%= link_to '商品の編集', edit_item_path, method: :get, class: "item-red-btn" %>
