@@ -1,4 +1,4 @@
-function check() {
+document.addEventListener("turbolinks:load", function(){
   /** 使用する要素の宣言 **/
   /* 商品価格valueの値を取得し,input_valueに格納する */
   const value_id = document.getElementById("item-price");
@@ -21,6 +21,4 @@ function check() {
       profit_id.innerHTML = "NaN";
     }
   });
-}
-/** ウィンドウが読み込まれたときにcheck関数を実行する **/
-window.addEventListener("load", check);
+})
